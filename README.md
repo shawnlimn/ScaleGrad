@@ -1,12 +1,13 @@
 # ScaleGrad
 
 
-
 Source code for [Straight to the Gradient: Learning to Use Novel Tokens for Neural Text Generation](http://proceedings.mlr.press/v139/lin21b/lin21b.pdf)) 
+
 Xiang Lin, Simeng Han and Shafiq Joty 
+
 Accepted at 38th International Conference on Machine Learning (**ICML'21**).
 
-The repo is adapted from [Neural Unlikelihood Training](https://github.com/facebookresearch/unlikelihood_training/).You could either follow the original repo or the instruction below to finish installing the dependencies. 
+The repo is adapted from [Neural Unlikelihood Training](https://github.com/facebookresearch/unlikelihood_training/). You could either follow the original repo or the instruction below to finish installing the dependencies. 
 
 
 
@@ -44,7 +45,7 @@ cp -r $SCALEGRAD_DIR/custom $FAIRSEQ_DIR/fairseq
 
 ## Finetuning GPT-2 for Language Modeling and Auto Completion
 
-We will again assume that you are in the `fairseq` base directory.
+We assume that you are in the `fairseq` base directory.
 
 ### Dataset
 
@@ -56,9 +57,9 @@ tar -xzvf wikitext-103-bpe_v0.tar.gz
 mv wikitext-103-bpe_v0 data-bin/
 ```
 
-#### Finetuning with ScaleGrad/MLE:
+### Finetuning with ScaleGrad/MLE:
 
-$\gamma$ (gamma) is the only hyper-parameter needed to be pre-determined. $\gamma=1$ is equivalent to performing MLE finetuning. In our paper, we experimented with three different choices from \{0.2,0.5,0.8\}.
+`gamma` is the only hyper-parameter needed to be pre-determined. `gamma=1` is equivalent to performing MLE finetuning. In our paper, we experimented with three different choices from \{0.2,0.5,0.8\}.
 
 ```bash
 python fairseq/custom/gpt2/run_gpt2.py  \
@@ -74,7 +75,7 @@ python fairseq/custom/gpt2/run_gpt2.py  \
 --seed 60 
 ```
 
-#### Evaluation
+### Evaluation
 
 ```
 python fairseq/custom/gpt2/run_gpt2.py  \
