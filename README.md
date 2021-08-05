@@ -1,7 +1,7 @@
 # ScaleGrad
 
 
-Source code for [Straight to the Gradient: Learning to Use Novel Tokens for Neural Text Generation](http://proceedings.mlr.press/v139/lin21b/lin21b.pdf)) 
+Source code for [Straight to the Gradient: Learning to Use Novel Tokens for Neural Text Generation](http://proceedings.mlr.press/v139/lin21b/lin21b.pdf)
 
 Xiang Lin, Simeng Han and Shafiq Joty 
 
