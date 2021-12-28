@@ -112,17 +112,17 @@ def sample_sequence(model, prefix_batch, prefix_length, continuation_length, top
 
 def getNovelMask(target, vocab_size):
     b,l = target.size()
-    zeros = torch.zeros(b,l,vocab_size).cuda()
-    ones = torch.ones(b,l,vocab_size).cuda()
+    zeros = torch.zeros(b,l,vocab_size).to(target.device)
+    ones = torch.ones(b,l,vocab_size).to(target.device)
 
-    target_index = target.expand(b,l,l).transpose(-2,-1).triu().transpose(-2,-1)
+    target_index = target.unsqueeze(1).expand(b,l,l).transpose(-2,-1).triu().transpose(-2,-1)
     matrix = zeros.scatter_add_(2, target_index, ones)
     matrix[:,:,0] = 0
-    summ_true = torch.tensor(range(1,l+1)).unsqueeze(0).float().cuda()
+    summ_true = torch.tensor(range(1,l+1)).unsqueeze(0).float().to(target.device)
     summ_now = torch.sum(matrix,dim=-1)
     diff = summ_true - summ_now
     matrix[:,:,0] = diff
-    matrix = torch.cat((torch.zeros(b,1,vocab_size).cuda(),matrix[:,:-1,:]),-2)
+    matrix = torch.cat((torch.zeros(b,1,vocab_size).to(target.device),matrix[:,:-1,:]),1)
     novel_mask = matrix < 1.
 
     return novel_mask
